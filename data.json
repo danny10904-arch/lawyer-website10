@@ -1,0 +1,318 @@
+{
+  "hero": {
+    "title": "以專業守護",
+    "subtitle": "您的權益",
+    "description": "橫跨民事、家事與勞資領域，於多地方法院累積豐富勝訴經驗；以嚴謹法律思維與人本關懷，為當事人打造穩健而有力的解決方案"
+  },
+  "about": {
+    "title": "法律不只是條文，更是守護生活的溫度",
+    "points": [
+      {
+        "number": "01",
+        "title": "細膩傾聽",
+        "description": "每一件案件背後都是一個人生故事。我們重視與當事人的溝通，深入了解您的真實需求。"
+      },
+      {
+        "number": "02",
+        "title": "精準策略",
+        "description": "憑藉豐富的實務經驗，為複雜的法律爭議制定最有利的訴訟或協商策略。"
+      },
+      {
+        "number": "03",
+        "title": "全程陪伴",
+        "description": "從法律諮詢到判決執行，我們全程與您並肩作戰，讓法律程序不再令人徬徨。"
+      }
+    ]
+  },
+  "contact": {
+    "email": "jamie.chen@attorney-jc.com",
+    "phone": "0912 931 277",
+    "address": "台北市大安區辛亥路一段84號8樓 (預約制)",
+    "facebook": "https://www.facebook.com/profile.php?id=61579873591287",
+    "instagram": "https://www.instagram.com/jmpchen/"
+  },
+  "expertise": [
+    {
+      "title": "家事與遺產繼承",
+      "description": "協助處理遺產清冊陳報、繼承權益維護、遺囑撰擬及家事紛爭調解。",
+      "iconName": "Users",
+      "cases": "112年度司繼字第1967號"
+    },
+    {
+      "title": "民事訴訟與契約",
+      "description": "專業處理承攬報酬請求、契約履行爭議、各類民事損害賠償及侵權行為訴訟。",
+      "iconName": "Scale",
+      "cases": "112年度補字第886號"
+    },
+    {
+      "title": "勞資爭議處理",
+      "description": "保障勞工權益，處理資遣費請求、確認僱傭關係存在及勞動契約爭議。",
+      "iconName": "Briefcase",
+      "cases": "110年度勞訴字第248號"
+    },
+    {
+      "title": "金融與刑事辯護",
+      "description": "針對洗錢防制、詐欺等金融犯罪提供專業辯護，及刑事附帶民事損害賠償訴訟。",
+      "iconName": "ShieldCheck",
+      "cases": "113年度金訴字第2108號"
+    },
+    {
+      "title": "智慧財產與行政訴訟",
+      "description": "處理公平交易法、智慧財產權爭議及行政處分之救濟與訴訟。",
+      "iconName": "Gavel",
+      "cases": "110年度民公訴字第10號"
+    }
+  ],
+  "judgments": [
+    {
+      "id": "PCDM-114-1078",
+      "court": "臺灣新北地方法院",
+      "year": "114年度",
+      "type": "審交易字第1078號",
+      "subject": "過失傷害 (交通刑事)",
+      "date": "2025-11-24",
+      "category": "刑事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=PCDM%2c114%2c%e5%af%a9%e4%ba%a4%e6%98%93%2c1078%2c20251124%2c1&ot=in"
+    },
+    {
+      "id": "PCDV-114-136",
+      "court": "臺灣新北地方法院",
+      "year": "114年度",
+      "type": "審補字第136號",
+      "subject": "損害賠償 (民事訴訟)",
+      "date": "2025-11-10",
+      "category": "民事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=PCDV%2c114%2c%e5%af%a9%e8%a3%9c%2c136%2c20251110%2c1&ot=in"
+    },
+    {
+      "id": "PCDV-114-1340",
+      "court": "臺灣新北地方法院",
+      "year": "114年度",
+      "type": "訴字第1340號",
+      "subject": "給付承攬報酬",
+      "date": "2025-06-25",
+      "category": "民事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=PCDV%2c114%2c%e8%a8%b4%2c1340%2c20250625%2c1&ot=in"
+    },
+    {
+      "id": "TPHM-114-1446",
+      "court": "臺灣高等法院",
+      "year": "114年度",
+      "type": "上訴字第1446號",
+      "subject": "毒品危害防制條例 (刑事二審)",
+      "date": "2025-05-21",
+      "category": "刑事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TPHM%2c114%2c%e4%b8%8a%e8%a8%b4%2c1446%2c20250521%2c1&ot=in"
+    },
+    {
+      "id": "TCDV-114-5",
+      "court": "臺灣臺中地方法院",
+      "year": "114年度",
+      "type": "金字第5號",
+      "subject": "損害賠償 (金融爭議)",
+      "date": "2025-02-21",
+      "category": "金融犯罪/賠償",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TCDV%2c114%2c%e9%87%91%2c5%2c20250221%2c1&ot=in"
+    },
+    {
+      "id": "TPEV-114-3399",
+      "court": "臺灣臺北地方法院",
+      "year": "114年度",
+      "type": "北簡字第3399號",
+      "subject": "給付簽帳卡消費款",
+      "date": "2025-08-01",
+      "category": "民事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TPEV%2c114%2c%e5%8c%97%e7%b0%a1%2c3399%2c20250801%2c2&ot=in"
+    },
+    {
+      "id": "TPEV-114-3399-2",
+      "court": "臺灣臺北地方法院",
+      "year": "114年度",
+      "type": "北簡字第3399號",
+      "subject": "給付簽帳卡消費款 (程序)",
+      "date": "2025-07-10",
+      "category": "民事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TPEV%2c114%2c%e5%8c%97%e7%b0%a1%2c3399%2c20250710%2c1&ot=in"
+    },
+    {
+      "id": "TPEV-114-853",
+      "court": "臺灣臺北地方法院",
+      "year": "114年度",
+      "type": "北補字第853號",
+      "subject": "損害賠償 (民事補正)",
+      "date": "2025-03-31",
+      "category": "民事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TPEV%2c114%2c%e5%8c%97%e8%a3%9c%2c853%2c20250331%2c1&ot=in"
+    },
+    {
+      "id": "PCEV-112-2602",
+      "court": "臺灣新北地方法院",
+      "year": "112年度",
+      "type": "板簡字第2602號",
+      "subject": "返還不當得利 (二審)",
+      "date": "2024-01-03",
+      "category": "民事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=PCEV%2c112%2c%e6%9d%bf%e7%b0%a1%2c2602%2c20240103%2c2&ot=in"
+    },
+    {
+      "id": "PCEV-112-2602-1",
+      "court": "臺灣新北地方法院",
+      "year": "112年度",
+      "type": "板簡字第2602號",
+      "subject": "返還不當得利 (一審)",
+      "date": "2023-10-25",
+      "category": "民事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=PCEV%2c112%2c%e6%9d%bf%e7%b0%a1%2c2602%2c20231025%2c1&ot=in"
+    },
+    {
+      "id": "PCDM-113-2663",
+      "court": "臺灣新北地方法院",
+      "year": "113年度",
+      "type": "審附民字第2663號",
+      "subject": "刑事附帶民事訴訟 (損害賠償)",
+      "date": "2025-01-10",
+      "category": "刑事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=PCDM%2c113%2c%e5%af%a9%e9%99%84%e6%b0%91%2c2663%2c20250110%2c1&ot=in"
+    },
+    {
+      "id": "PCDM-113-2108",
+      "court": "臺灣新北地方法院",
+      "year": "113年度",
+      "type": "金訴字第2108號",
+      "subject": "洗錢防制法 (刑事金融)",
+      "date": "2024-12-31",
+      "category": "金融犯罪/賠償",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=PCDM%2c113%2c%e9%87%91%e8%a8%b4%2c2108%2c20241231%2c1&ot=in"
+    },
+    {
+      "id": "TCDM-113-2682",
+      "court": "臺灣臺中地方法院",
+      "year": "113年度",
+      "type": "附民字第2682號",
+      "subject": "損害賠償 (刑事附帶民事)",
+      "date": "2024-11-20",
+      "category": "刑事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TCDM%2c113%2c%e9%99%84%e6%b0%91%2c2682%2c20241120%2c1&ot=in"
+    },
+    {
+      "id": "SLDV-112-1479",
+      "court": "臺灣士林地方法院",
+      "year": "112年度",
+      "type": "訴字第1479號",
+      "subject": "確認抵押權不存在等",
+      "date": "2024-10-04",
+      "category": "民事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=SLDV%2c112%2c%e8%a8%b4%2c1479%2c20241004%2c1&ot=in"
+    },
+    {
+      "id": "PCDV-112-1654",
+      "court": "臺灣新北地方法院",
+      "year": "112年度",
+      "type": "訴字第1654號",
+      "subject": "給付承攬報酬 (民事訴訟)",
+      "date": "2023-07-21",
+      "category": "民事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=PCDV%2c112%2c%e8%a8%b4%2c1654%2c20230721%2c1&ot=in"
+    },
+    {
+      "id": "TPDV-112-1967",
+      "court": "臺灣臺北地方法院",
+      "year": "112年度",
+      "type": "司繼字第1967號",
+      "subject": "陳報遺產清冊 (家事繼承)",
+      "date": "2023-07-21",
+      "category": "家事與遺產繼承",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TPDV%2c112%2c%e5%8f%b8%e7%b9%bc%2c1967%2c20230721%2c1&ot=in"
+    },
+    {
+      "id": "PCDV-112-886",
+      "court": "臺灣新北地方法院",
+      "year": "112年度",
+      "type": "補字第886號",
+      "subject": "損害賠償 (民事訴訟)",
+      "date": "2023-05-30",
+      "category": "民事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=PCDV%2c112%2c%e8%a3%9c%2c886%2c20230530%2c1&ot=in"
+    },
+    {
+      "id": "TCDV-111-713",
+      "court": "臺灣臺中地方法院",
+      "year": "111年度",
+      "type": "勞補字第713號",
+      "subject": "給付資遣費等 (勞資爭議)",
+      "date": "2022-11-23",
+      "category": "勞資爭議",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TCDV%2c111%2c%e5%8b%9e%e8%a3%9c%2c713%2c20221123%2c1&ot=in"
+    },
+    {
+      "id": "PCDV-111-1976",
+      "court": "臺灣新北地方法院",
+      "year": "111年度",
+      "type": "訴字第1976號",
+      "subject": "返還借款 (民事訴訟)",
+      "date": "2022-09-29",
+      "category": "民事訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=PCDV%2c111%2c%e8%a8%b4%2c1976%2c20220929%2c1&ot=in"
+    },
+    {
+      "id": "TPDV-110-248",
+      "court": "臺灣臺北地方法院",
+      "year": "110年度",
+      "type": "勞訴字第248號",
+      "subject": "確認僱傭關係存在等 (勞資爭議)",
+      "date": "2022-05-06",
+      "category": "勞資爭議",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TPDV%2c110%2c%e5%8b%9e%e8%a8%b4%2c248%2c20220506%2c1&ot=in"
+    },
+    {
+      "id": "IPCV-110-10",
+      "court": "智慧財產及商業法院",
+      "year": "110年度",
+      "type": "民公訴字第10號",
+      "subject": "公平交易法 (智慧財產)",
+      "date": "2021-11-30",
+      "category": "智慧財產權",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=IPCV%2c110%2c%e6%b0%91%e5%85%ac%e8%a8%b4%2c10%2c20211130%2c1&ot=in"
+    },
+    {
+      "id": "PCDV-109-529",
+      "court": "臺灣新北地方法院",
+      "year": "109年度",
+      "type": "婚字第529號",
+      "subject": "離婚 (家事婚姻)",
+      "date": "2021-09-15",
+      "category": "家事與遺產繼承",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=PCDV%2c109%2c%e5%a9%9a%2c529%2c20210915%2c1&ot=in"
+    },
+    {
+      "id": "TPDV-110-25",
+      "court": "臺灣臺北地方法院",
+      "year": "110年度",
+      "type": "勞補字第25號",
+      "subject": "給付薪資等 (勞資爭議)",
+      "date": "2021-02-17",
+      "category": "勞資爭議",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TPDV%2c110%2c%e5%8b%9e%e8%a3%9c%2c25%2c20210217%2c1&ot=in"
+    },
+    {
+      "id": "TPHV-109-5",
+      "court": "臺灣高等法院",
+      "year": "109年度",
+      "type": "重勞上更一字第5號",
+      "subject": "確認僱傭關係存在 (勞資二審)",
+      "date": "2020-12-29",
+      "category": "勞資爭議",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TPHV%2c109%2c%e9%87%8d%e5%8b%9e%e4%b8%8a%e6%9b%b4%e4%b8%80%2c5%2c20201229%2c1&ot=in"
+    },
+    {
+      "id": "TPBA-109-2",
+      "court": "臺北高等行政法院",
+      "year": "109年度",
+      "type": "收抗字第2號",
+      "subject": "收容聲請 (行政訴訟)",
+      "date": "2020-04-17",
+      "category": "行政訴訟",
+      "link": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TPBA%2c109%2c%e6%94%b6%e6%8a%97%2c2%2c20200417%2c1&ot=in"
+    }
+  ]
+}

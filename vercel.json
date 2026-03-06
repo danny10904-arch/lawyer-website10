@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/content",
+      "destination": "/api/content"
+    },
+    {
+      "source": "/api/login",
+      "destination": "/api/login"
+    },
+    {
+      "source": "/api/update-content",
+      "destination": "/api/update-content"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
