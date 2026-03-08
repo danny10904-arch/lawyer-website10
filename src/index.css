@@ -4,7 +4,8 @@
 @theme {
   --color-legal-navy: #1a2a3a;
   --color-legal-gold: #c5a059;
-  --color-legal-sand: #fdfaf5;
+  /* --color-legal-sand: #fdfaf5; */
+  --color-legal-sand: #f1f5f9
   
   --font-serif: "Playfair Display", serif;
   --font-sans: "Inter", sans-serif;
