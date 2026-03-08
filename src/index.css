@@ -23,7 +23,17 @@
   h1, h2, h3, h4 {
     @apply font-serif;
   }
+  /* --- 在這裡加入輸入框的全域樣式 --- */
+  input, textarea, select {
+    /* 增加邊框感與淺灰底色，解決「找不到洞點擊」的問題 */
+    @apply border border-gray-300 bg-gray-50/50 transition-all rounded-lg;
+  }
+  /* 點擊時的視覺回饋：邊框變金、底色變白 */
+  input:focus, textarea:focus {
+    @apply border-legal-gold bg-white ring-2 ring-legal-gold/20 outline-none;
+  }
 }
+
 
 @layer components {
   .glass {
