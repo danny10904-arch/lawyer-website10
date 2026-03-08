@@ -668,8 +668,7 @@ export default function AdminPanel() {
                     type="email" 
                     value={content.contact.email}
                     onChange={(e) => setContent({ ...content, contact: { ...content.contact, email: e.target.value } })}
-                    /* className="w-full bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none" */
-                    className="w-full bg-gray-50 border border-gray-200 rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
+                    className="w-full bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"                     
                   />
                 </div>
                 <div>
