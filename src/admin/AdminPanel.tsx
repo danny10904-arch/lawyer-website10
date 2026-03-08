@@ -247,7 +247,7 @@ export default function AdminPanel() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
+    <div className="min-h-screen bg-gray-200 flex">
       {/* Sidebar */}
       <aside className="w-64 bg-legal-navy text-white flex flex-col">
         <div className="p-6 border-b border-white/10 flex items-center gap-3">
