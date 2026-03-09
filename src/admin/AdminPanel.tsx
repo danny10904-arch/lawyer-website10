@@ -197,7 +197,7 @@ export default function AdminPanel() {
                   type={showPassword ? "text" : "password"} 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-legal-sand border-none rounded-xl p-4 pr-12 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
+                  className="w-full bg-legal-sand   rounded-xl p-4 pr-12 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
                   placeholder="請輸入密碼"
                 />
                 <button 
@@ -727,7 +727,7 @@ export default function AdminPanel() {
                       required
                       value={currentPassword}
                       onChange={(e) => setCurrentPassword(e.target.value)}
-                      className="w-full bg-white border-none rounded-xl p-3 text-legal-navy outline-none"
+                      className="w-full bg-white rounded-xl p-3 text-legal-navy outline-none"
                     />
                   </div>
                   <div>
