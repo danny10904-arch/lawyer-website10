@@ -1,3 +1,4 @@
+// update-content.ts 修正建議
 import jwt from "jsonwebtoken";
 import { updateContent } from "./db.js";
 
@@ -13,10 +14,17 @@ export default async function handler(req: any, res: any) {
 
   try {
     jwt.verify(token, SECRET_KEY);
-    const newData = req.body;
+    
+    // ✅ 確保 newData 是物件
+    let newData = req.body;
+    if (typeof newData === 'string') {
+      newData = JSON.parse(newData);
+    }
+
     await updateContent(newData);
     res.json({ message: "更新成功" });
-  } catch (err) {
-    res.status(401).json({ error: "無效的 Token" });
+  } catch (err: any) {
+    console.error("API Error:", err);
+    res.status(401).json({ error: err.message || "更新失敗" });
   }
 }
