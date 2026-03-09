@@ -102,23 +102,30 @@ export async function getContent() {
   };
 }
 
+// db.ts 修正後的 updateContent 函數
 export async function updateContent(newContent: any) {
   const existingContent = await getRawContent();
   const mergedContent = { ...existingContent, ...newContent };
   
   if (supabase) {
     console.log('Updating content in Supabase...');
-    const contentToSave = typeof mergedContent === 'object' ? JSON.stringify(mergedContent) : mergedContent;
+    // ✅ 修正：不要使用 JSON.stringify，直接傳入 mergedContent 物件
+    // Supabase SDK 會自動處理 JSONB 格式
     const { error } = await supabase
       .from('site_content')
-      .upsert({ id: 1, content: contentToSave });
+      .upsert({ id: 1, content: mergedContent }); 
     
     if (error) throw error;
     return { success: true };
   }
 
-  // Local file write
-  console.log('Attempting local write to data.json...');
-  fs.writeFileSync(DATA_FILE, JSON.stringify(mergedContent, null, 2));
-  return { success: true };
+  // 本地檔案寫入邏輯保持不變...
+  try {
+    const contentToSave = JSON.stringify(mergedContent, null, 2);
+    fs.writeFileSync(DATA_FILE, contentToSave);
+    return { success: true };
+  } catch (err) {
+    console.error('Local File Write Error:', err);
+    throw err;
+  }
 }
