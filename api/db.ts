@@ -109,28 +109,40 @@ export async function getContent() {
 
 // db.ts 修正後的 updateContent 函數
 export async function updateContent(newContent: any) {
+  // 1. 先獲取目前資料庫中完整的資料
   const existingContent = await getRawContent();
-  const mergedContent = { ...existingContent, ...newContent };
+
+  // 2. 進行深層合併，特別保護 admin 欄位
+  const mergedContent = {
+    ...existingContent,
+    ...newContent,
+    // 確保 admin 永遠存在，除非 newContent 明確要更新它
+    admin: {
+      ...(existingContent.admin || {}),
+      ...(newContent.admin || {})
+    }
+  };
 
   if (supabase) {
     console.log('Updating content in Supabase...');
-    // ✅ 修正：不要使用 JSON.stringify，直接傳入 mergedContent 物件
-    // Supabase SDK 會自動處理 JSONB 格式
+    // 直接傳入物件，不要 JSON.stringify
     const { error } = await supabase
       .from('site_content')
       .upsert({ id: 1, content: mergedContent });
 
-    if (error) throw error;
+    if (error) {
+      console.error('Supabase Update Error:', error);
+      throw error;
+    }
     return { success: true };
-  }
-
-  // 本地檔案寫入邏輯保持不變...
-  try {
-    const contentToSave = JSON.stringify(mergedContent, null, 2);
-    fs.writeFileSync(DATA_FILE, contentToSave);
-    return { success: true };
-  } catch (err) {
-    console.error('Local File Write Error:', err);
-    throw err;
+  } else {
+    // 本地環境寫入檔案
+    try {
+      fs.writeFileSync(DATA_FILE, JSON.stringify(mergedContent, null, 2));
+      return { success: true };
+    } catch (err) {
+      console.error('File Write Error:', err);
+      throw err;
+    }
   }
 }
