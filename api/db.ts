@@ -36,7 +36,7 @@ export async function getRawContent() {
         .select('content')
         .eq('id', 1)
         .single();
-      
+
       if (!error && data) {
         let contentData = data.content;
         while (typeof contentData === 'string') {
@@ -90,7 +90,12 @@ export async function getContent() {
   return {
     ...localData,
     ...contentData,
-    hero: contentData.hero || localData.hero,
+    hero: {
+      ...localData.hero,
+      ...contentData.hero,
+      // 確保 imageUrl 有被傳遞
+      imageUrl: contentData.hero?.imageUrl || localData.hero?.imageUrl
+    },
     about: {
       title: contentData.about?.title || localData.about?.title || "關於陳律師",
       avatarUrl: contentData.about?.avatarUrl || localData.about?.avatarUrl,
@@ -106,15 +111,15 @@ export async function getContent() {
 export async function updateContent(newContent: any) {
   const existingContent = await getRawContent();
   const mergedContent = { ...existingContent, ...newContent };
-  
+
   if (supabase) {
     console.log('Updating content in Supabase...');
     // ✅ 修正：不要使用 JSON.stringify，直接傳入 mergedContent 物件
     // Supabase SDK 會自動處理 JSONB 格式
     const { error } = await supabase
       .from('site_content')
-      .upsert({ id: 1, content: mergedContent }); 
-    
+      .upsert({ id: 1, content: mergedContent });
+
     if (error) throw error;
     return { success: true };
   }

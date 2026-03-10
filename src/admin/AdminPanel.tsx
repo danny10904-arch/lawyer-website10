@@ -1,14 +1,14 @@
 import { useState, useEffect, FormEvent } from "react";
 import React from "react";
 import { SiteContent, Expertise, Judgment } from "../types";
-import { 
-  Save, 
-  Plus, 
-  Trash2, 
-  LogOut, 
-  LayoutDashboard, 
-  Briefcase, 
-  Scale, 
+import {
+  Save,
+  Plus,
+  Trash2,
+  LogOut,
+  LayoutDashboard,
+  Briefcase,
+  Scale,
   Info,
   ChevronRight,
   Loader2,
@@ -58,7 +58,7 @@ export default function AdminPanel() {
       const res = await fetch(`/api/content?t=${Date.now()}`);
       if (!res.ok) throw new Error("無法讀取資料");
       const data = await res.json();
-      
+
       let parsedData = data;
       // Robust parsing similar to MainSite.tsx
       while (typeof parsedData === 'string') {
@@ -68,7 +68,7 @@ export default function AdminPanel() {
           parsedData = parsed;
         } catch (e) { break; }
       }
-      
+
       if (parsedData && parsedData.content && !parsedData.hero) {
         parsedData = parsedData.content;
         while (typeof parsedData === 'string') {
@@ -79,7 +79,7 @@ export default function AdminPanel() {
           } catch (e) { break; }
         }
       }
-      
+
       if (Array.isArray(parsedData) && parsedData.length > 0) {
         parsedData = parsedData[0];
       }
@@ -128,21 +128,28 @@ export default function AdminPanel() {
     try {
       const res = await fetch("/api/update-content", {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${localStorage.getItem("admin_token")}`
         },
         body: JSON.stringify(content),
       });
       const data = await res.json();
+      // 這裡加入 JWT 過期的中文判斷
+      if (!res.ok) {
+        if (data.error === "jwt expired") {
+          alert("授權憑證已過期，請重新登入");
+          handleLogout(); // 自動踢回登入頁面
+          return;
+        }
+        throw new Error(data.error || "儲存失敗");
+      }
       if (data.message) {
         setMessage("儲存成功！");
         setTimeout(() => setMessage(""), 3000);
-      } else {
-        alert(data.error);
       }
-    } catch (err) {
-      alert("儲存失敗");
+    } catch (err: any) {
+      alert(err.message || "系統錯誤，請稍後再試");
     } finally {
       setIsSaving(false);
     }
@@ -158,7 +165,7 @@ export default function AdminPanel() {
     try {
       const res = await fetch("/api/change-password", {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${localStorage.getItem("admin_token")}`
         },
@@ -193,14 +200,14 @@ export default function AdminPanel() {
             <div>
               <label className="block text-sm font-bold text-legal-navy mb-2 uppercase tracking-widest">管理員密碼</label>
               <div className="relative">
-                <input 
-                  type={showPassword ? "text" : "password"} 
+                <input
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-legal-sand   rounded-xl p-4 pr-12 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
                   placeholder="請輸入密碼"
                 />
-                <button 
+                <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-legal-navy/40 hover:text-legal-navy transition-colors"
@@ -226,7 +233,7 @@ export default function AdminPanel() {
           <ShieldCheck className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <h2 className="text-xl font-bold text-legal-navy mb-2">載入失敗</h2>
           <p className="text-legal-navy/60 mb-6">{fetchError}</p>
-          <button 
+          <button
             onClick={fetchContent}
             className="w-full bg-legal-navy text-white py-3 rounded-xl font-bold hover:bg-legal-gold transition-colors"
           >
@@ -255,37 +262,37 @@ export default function AdminPanel() {
           <span className="font-bold tracking-tight">後端管理系統</span>
         </div>
         <nav className="flex-grow p-4 space-y-2">
-          <button 
+          <button
             onClick={() => setActiveTab("hero")}
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${activeTab === "hero" ? "bg-legal-gold text-white" : "hover:bg-white/5 text-white/60"}`}
           >
             <Info className="w-5 h-5" /> 首頁文字
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab("about")}
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${activeTab === "about" ? "bg-legal-gold text-white" : "hover:bg-white/5 text-white/60"}`}
           >
             <Users className="w-5 h-5" /> 關於我
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab("expertise")}
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${activeTab === "expertise" ? "bg-legal-gold text-white" : "hover:bg-white/5 text-white/60"}`}
           >
             <Briefcase className="w-5 h-5" /> 專業領域
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab("judgments")}
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${activeTab === "judgments" ? "bg-legal-gold text-white" : "hover:bg-white/5 text-white/60"}`}
           >
             <Scale className="w-5 h-5" /> 實務經歷
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab("contact")}
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${activeTab === "contact" ? "bg-legal-gold text-white" : "hover:bg-white/5 text-white/60"}`}
           >
             <Mail className="w-5 h-5" /> 聯絡資訊
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab("settings")}
             className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${activeTab === "settings" ? "bg-legal-gold text-white" : "hover:bg-white/5 text-white/60"}`}
           >
@@ -293,7 +300,7 @@ export default function AdminPanel() {
           </button>
         </nav>
         <div className="p-4 border-t border-white/10">
-          <button 
+          <button
             onClick={handleLogout}
             className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/5 transition-colors"
           >
@@ -322,7 +329,7 @@ export default function AdminPanel() {
                 <CheckCircle2 className="w-5 h-5" /> {message}
               </span>
             )}
-            <button 
+            <button
               onClick={handleSave}
               disabled={isSaving}
               className="bg-legal-navy text-white px-8 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-legal-gold transition-all shadow-lg disabled:opacity-50"
@@ -336,10 +343,39 @@ export default function AdminPanel() {
         <div className="bg-white p-8 rounded-3xl shadow-sm border border-legal-navy/5">
           {activeTab === "hero" && (
             <div className="space-y-6">
+              {/* --- 在 activeTab === "hero" 區塊內加入以下代碼 --- */}
+              <div>
+                <label className="block text-sm font-bold text-legal-navy mb-2 uppercase tracking-widest">
+                  主頁大照片網址 (Hero Image URL)
+                </label>
+                <div className="flex gap-4 items-center">
+                  <div className="w-16 h-16 rounded-xl overflow-hidden bg-legal-sand border-2 border-legal-gold flex-shrink-0">
+                    {/* 預覽圖片 */}
+                    {content.hero.imageUrl ? (
+                      <img src={content.hero.imageUrl} alt="Hero Preview" className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-legal-navy/20">
+                        <UserCircle className="w-8 h-8" />
+                      </div>
+                    )}
+                  </div>
+                  <input
+                    type="text"
+                    value={content.hero.imageUrl || ""}
+                    onChange={(e) => setContent({
+                      ...content,
+                      hero: { ...content.hero, imageUrl: e.target.value }
+                    })}
+                    className="flex-grow bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
+                    placeholder="請輸入照片網址，例如：https://..."
+                  />
+                </div>
+              </div>
+              {/* --- 原有的描述文字 textarea 放在下面 --- */}
               <div>
                 <label className="block text-sm font-bold text-legal-navy mb-2 uppercase tracking-widest">主標題 (第一行)</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={content.hero.title}
                   onChange={(e) => setContent({ ...content, hero: { ...content.hero, title: e.target.value } })}
                   className="w-full bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
@@ -347,8 +383,8 @@ export default function AdminPanel() {
               </div>
               <div>
                 <label className="block text-sm font-bold text-legal-navy mb-2 uppercase tracking-widest">主標題 (金黃色部分)</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={content.hero.subtitle}
                   onChange={(e) => setContent({ ...content, hero: { ...content.hero, subtitle: e.target.value } })}
                   className="w-full bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
@@ -356,7 +392,7 @@ export default function AdminPanel() {
               </div>
               <div>
                 <label className="block text-sm font-bold text-legal-navy mb-2 uppercase tracking-widest">首頁描述文字</label>
-                <textarea 
+                <textarea
                   rows={4}
                   value={content.hero.description}
                   onChange={(e) => setContent({ ...content, hero: { ...content.hero, description: e.target.value } })}
@@ -370,8 +406,8 @@ export default function AdminPanel() {
             <div className="space-y-8">
               <div>
                 <label className="block text-sm font-bold text-legal-navy mb-2 uppercase tracking-widest">區塊標題</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={content.about.title}
                   onChange={(e) => setContent({ ...content, about: { ...content.about, title: e.target.value } })}
                   className="w-full bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
@@ -389,8 +425,8 @@ export default function AdminPanel() {
                       </div>
                     )}
                   </div>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={content.about.avatarUrl || ""}
                     onChange={(e) => setContent({ ...content, about: { ...content.about, avatarUrl: e.target.value } })}
                     className="flex-grow bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
@@ -405,8 +441,8 @@ export default function AdminPanel() {
                     <div className="flex gap-4">
                       <div className="w-1/4">
                         <label className="block text-[10px] font-bold text-legal-navy/40 mb-1 uppercase">編號</label>
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           value={point.number}
                           onChange={(e) => {
                             const newPoints = [...content.about.points];
@@ -418,8 +454,8 @@ export default function AdminPanel() {
                       </div>
                       <div className="w-3/4">
                         <label className="block text-[10px] font-bold text-legal-navy/40 mb-1 uppercase">標題</label>
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           value={point.title}
                           onChange={(e) => {
                             const newPoints = [...content.about.points];
@@ -432,7 +468,7 @@ export default function AdminPanel() {
                     </div>
                     <div>
                       <label className="block text-[10px] font-bold text-legal-navy/40 mb-1 uppercase">描述</label>
-                      <textarea 
+                      <textarea
                         rows={2}
                         value={point.description}
                         onChange={(e) => {
@@ -453,7 +489,7 @@ export default function AdminPanel() {
             <div className="space-y-6">
               <div className="flex justify-between items-center">
                 <h3 className="font-bold text-legal-navy">專業領域列表</h3>
-                <button 
+                <button
                   onClick={() => {
                     const newItem: Expertise = { title: "新領域", description: "請輸入描述", iconName: "Scale", cases: "案號" };
                     setContent({ ...content, expertise: [...content.expertise, newItem] });
@@ -466,7 +502,7 @@ export default function AdminPanel() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {content.expertise.map((item, idx) => (
                   <div key={idx} className="p-6 bg-legal-sand rounded-2xl relative group">
-                    <button 
+                    <button
                       onClick={() => {
                         const newList = content.expertise.filter((_, i) => i !== idx);
                         setContent({ ...content, expertise: newList });
@@ -476,8 +512,8 @@ export default function AdminPanel() {
                       <Trash2 className="w-4 h-4" />
                     </button>
                     <div className="space-y-4">
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         value={item.title}
                         onChange={(e) => {
                           const newList = [...content.expertise];
@@ -487,7 +523,7 @@ export default function AdminPanel() {
                         className="w-full bg-white border-none rounded-lg p-3 font-bold text-legal-navy outline-none"
                         placeholder="領域名稱"
                       />
-                      <textarea 
+                      <textarea
                         rows={3}
                         value={item.description}
                         onChange={(e) => {
@@ -501,8 +537,8 @@ export default function AdminPanel() {
                       <div className="flex gap-4">
                         <div className="flex-grow">
                           <label className="block text-[10px] font-bold text-legal-navy/40 mb-1 uppercase">代表案號</label>
-                          <input 
-                            type="text" 
+                          <input
+                            type="text"
                             value={item.cases}
                             onChange={(e) => {
                               const newList = [...content.expertise];
@@ -514,7 +550,7 @@ export default function AdminPanel() {
                         </div>
                         <div>
                           <label className="block text-[10px] font-bold text-legal-navy/40 mb-1 uppercase">圖示名稱</label>
-                          <select 
+                          <select
                             value={item.iconName}
                             onChange={(e) => {
                               const newList = [...content.expertise];
@@ -542,17 +578,17 @@ export default function AdminPanel() {
             <div className="space-y-6">
               <div className="flex justify-between items-center">
                 <h3 className="font-bold text-legal-navy">實務經歷列表 ({content.judgments.length} 筆)</h3>
-                <button 
+                <button
                   onClick={() => {
-                    const newItem: Judgment = { 
-                      id: Date.now().toString(), 
-                      court: "臺灣法院", 
-                      year: "114年度", 
-                      type: "案號", 
-                      subject: "案件主旨", 
-                      date: new Date().toISOString().split('T')[0], 
-                      category: "民事訴訟", 
-                      link: "" 
+                    const newItem: Judgment = {
+                      id: Date.now().toString(),
+                      court: "臺灣法院",
+                      year: "114年度",
+                      type: "案號",
+                      subject: "案件主旨",
+                      date: new Date().toISOString().split('T')[0],
+                      category: "民事訴訟",
+                      link: ""
                     };
                     setContent({ ...content, judgments: [newItem, ...content.judgments] });
                   }}
@@ -566,8 +602,8 @@ export default function AdminPanel() {
                   <div key={item.id} className="p-4 bg-legal-sand rounded-2xl flex items-start gap-4 group">
                     <div className="flex-grow grid grid-cols-1 md:grid-cols-4 gap-4">
                       <div className="md:col-span-1 space-y-2">
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           value={item.year}
                           onChange={(e) => {
                             const newList = [...content.judgments];
@@ -577,7 +613,7 @@ export default function AdminPanel() {
                           className="w-full bg-white border-none rounded-lg p-2 text-xs outline-none"
                           placeholder="年度"
                         />
-                        <select 
+                        <select
                           value={item.category}
                           onChange={(e) => {
                             const newList = [...content.judgments];
@@ -596,8 +632,8 @@ export default function AdminPanel() {
                         </select>
                       </div>
                       <div className="md:col-span-2 space-y-2">
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           value={item.subject}
                           onChange={(e) => {
                             const newList = [...content.judgments];
@@ -607,8 +643,8 @@ export default function AdminPanel() {
                           className="w-full bg-white border-none rounded-lg p-2 text-sm font-bold outline-none"
                           placeholder="案件主旨"
                         />
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           value={item.link}
                           onChange={(e) => {
                             const newList = [...content.judgments];
@@ -620,8 +656,8 @@ export default function AdminPanel() {
                         />
                       </div>
                       <div className="md:col-span-1 space-y-2">
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           value={item.court}
                           onChange={(e) => {
                             const newList = [...content.judgments];
@@ -631,8 +667,8 @@ export default function AdminPanel() {
                           className="w-full bg-white border-none rounded-lg p-2 text-xs outline-none"
                           placeholder="法院"
                         />
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           value={item.type}
                           onChange={(e) => {
                             const newList = [...content.judgments];
@@ -644,7 +680,7 @@ export default function AdminPanel() {
                         />
                       </div>
                     </div>
-                    <button 
+                    <button
                       onClick={() => {
                         const newList = content.judgments.filter((_, i) => i !== idx);
                         setContent({ ...content, judgments: newList });
@@ -664,17 +700,17 @@ export default function AdminPanel() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-bold text-legal-navy mb-2 uppercase tracking-widest">電子郵件</label>
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     value={content.contact.email}
                     onChange={(e) => setContent({ ...content, contact: { ...content.contact, email: e.target.value } })}
-                    className="w-full bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"                     
+                    className="w-full bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-legal-navy mb-2 uppercase tracking-widest">聯繫電話</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={content.contact.phone}
                     onChange={(e) => setContent({ ...content, contact: { ...content.contact, phone: e.target.value } })}
                     className="w-full bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
@@ -683,8 +719,8 @@ export default function AdminPanel() {
               </div>
               <div>
                 <label className="block text-sm font-bold text-legal-navy mb-2 uppercase tracking-widest">事務所地址</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={content.contact.address}
                   onChange={(e) => setContent({ ...content, contact: { ...content.contact, address: e.target.value } })}
                   className="w-full bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
@@ -693,8 +729,8 @@ export default function AdminPanel() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-bold text-legal-navy mb-2 uppercase tracking-widest">Facebook 連結</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={content.contact.facebook}
                     onChange={(e) => setContent({ ...content, contact: { ...content.contact, facebook: e.target.value } })}
                     className="w-full bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
@@ -702,8 +738,8 @@ export default function AdminPanel() {
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-legal-navy mb-2 uppercase tracking-widest">Instagram 連結</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={content.contact.instagram}
                     onChange={(e) => setContent({ ...content, contact: { ...content.contact, instagram: e.target.value } })}
                     className="w-full bg-legal-sand border-none rounded-xl p-4 text-legal-navy focus:ring-2 focus:ring-legal-gold outline-none"
@@ -722,8 +758,8 @@ export default function AdminPanel() {
                 <form onSubmit={handleChangePassword} className="space-y-4">
                   <div>
                     <label className="block text-xs font-bold text-legal-navy/60 mb-1 uppercase">目前密碼</label>
-                    <input 
-                      type="password" 
+                    <input
+                      type="password"
                       required
                       value={currentPassword}
                       onChange={(e) => setCurrentPassword(e.target.value)}
@@ -732,8 +768,8 @@ export default function AdminPanel() {
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-legal-navy/60 mb-1 uppercase">新密碼</label>
-                    <input 
-                      type="password" 
+                    <input
+                      type="password"
                       required
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
@@ -742,15 +778,15 @@ export default function AdminPanel() {
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-legal-navy/60 mb-1 uppercase">確認新密碼</label>
-                    <input 
-                      type="password" 
+                    <input
+                      type="password"
                       required
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       className="w-full bg-white border-none rounded-xl p-3 text-legal-navy outline-none"
                     />
                   </div>
-                  <button 
+                  <button
                     type="submit"
                     disabled={isChangingPassword}
                     className="w-full bg-legal-navy text-white py-3 rounded-xl font-bold hover:bg-legal-gold transition-all disabled:opacity-50"

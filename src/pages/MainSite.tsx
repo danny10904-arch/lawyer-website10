@@ -1,14 +1,14 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { 
-  Scale, 
-  Briefcase, 
-  Users, 
-  Gavel, 
-  ChevronRight, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Instagram, 
+import {
+  Scale,
+  Briefcase,
+  Users,
+  Gavel,
+  ChevronRight,
+  Mail,
+  Phone,
+  MapPin,
+  Instagram,
   Facebook,
   Award,
   BookOpen,
@@ -77,7 +77,7 @@ export default function MainSite() {
       .then(data => {
         console.log("Received data from API:", data);
         let parsedData = data;
-        
+
         // Handle stringified JSON
         while (typeof parsedData === 'string') {
           try {
@@ -89,11 +89,11 @@ export default function MainSite() {
             break;
           }
         }
-        
+
         // Handle nested content property (e.g., if Supabase returns { content: { ... } })
         if (parsedData && parsedData.content && !parsedData.hero) {
           parsedData = parsedData.content;
-          
+
           // Handle stringified nested content
           while (typeof parsedData === 'string') {
             try {
@@ -106,12 +106,12 @@ export default function MainSite() {
             }
           }
         }
-        
+
         // Handle array wrapper
         if (Array.isArray(parsedData) && parsedData.length > 0) {
           parsedData = parsedData[0];
         }
-        
+
         if (isMounted) {
           setContent(parsedData);
           setError(null);
@@ -159,7 +159,7 @@ export default function MainSite() {
     contact: content?.contact || { email: "", phone: "", address: "", facebook: "", instagram: "" }
   };
 
-  const filteredJudgments = safeContent?.judgments 
+  const filteredJudgments = safeContent?.judgments
     ? (activeCategory === "全部" ? safeContent.judgments : safeContent.judgments.filter(j => j.category === activeCategory))
     : [];
 
@@ -197,7 +197,7 @@ export default function MainSite() {
           <h2 className="text-2xl font-bold">載入失敗</h2>
           <p className="text-white/60 max-w-xs mx-auto">{error}</p>
         </div>
-        <button 
+        <button
           onClick={() => window.location.reload()}
           className="bg-legal-gold text-white px-8 py-3 rounded-full font-bold hover:scale-105 transition-transform"
         >
@@ -238,8 +238,8 @@ export default function MainSite() {
       {/* Hero Section */}
       <section className="relative min-h-screen md:h-screen flex items-center justify-center overflow-hidden bg-legal-navy text-white pt-24 md:pt-20 pb-12 md:pb-0">
         <motion.div style={{ opacity, scale }} className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=2000" 
+          <img
+            src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=2000"
             alt="Law Office"
             className="w-full h-full object-cover opacity-30"
             referrerPolicy="no-referrer"
@@ -284,15 +284,17 @@ export default function MainSite() {
             className="relative max-w-sm mx-auto md:max-w-none"
           >
             <div className="aspect-[4/5] rounded-2xl overflow-hidden border-4 md:border-8 border-white/10 shadow-2xl relative group">
-              <img 
-                src="https://images.weserv.nl/?url=duk.tw/v8dWec.jpg" 
+              <img
+                {/* 修改這裡：優先讀取資料庫中的 imageUrl，若無則顯示預設網址 */}
+                src={content?.hero?.imageUrl || "https://images.weserv.nl/?url=duk.tw/v8dWec.jpg"}
+                // src="https://images.weserv.nl/?url=duk.tw/v8dWec.jpg"
                 alt="陳品潔律師"
                 className="w-full h-full object-cover transition-all duration-700"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-legal-gold/5 mix-blend-multiply" />
             </div>
-            <motion.div 
+            <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 glass p-4 md:p-6 rounded-xl shadow-xl"
@@ -315,17 +317,17 @@ export default function MainSite() {
       <section id="about" className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20"
             >
               {safeContent.about.avatarUrl && (
                 <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-legal-gold/20 shadow-2xl flex-shrink-0">
-                  <img 
-                    src={safeContent.about.avatarUrl} 
-                    alt="律師照片" 
+                  <img
+                    src={safeContent.about.avatarUrl}
+                    alt="律師照片"
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
                   />
@@ -431,7 +433,7 @@ export default function MainSite() {
               </motion.a>
             ))}
           </div>
-          
+
           {filteredJudgments.length > visibleCount && (
             <div className="mt-12 text-center">
               <button onClick={() => setVisibleCount(prev => prev + 6)} className="px-8 py-3 rounded-full border border-legal-navy text-legal-navy font-bold text-sm hover:bg-legal-navy hover:text-white transition-all">顯示更多案例</button>
