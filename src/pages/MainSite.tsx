@@ -285,9 +285,9 @@ export default function MainSite() {
           >
             <div className="aspect-[4/5] rounded-2xl overflow-hidden border-4 md:border-8 border-white/10 shadow-2xl relative group">
               <img
-                {/* 修改這裡：優先讀取資料庫中的 imageUrl，若無則顯示預設網址 */}
+                /* 修改這裡：優先讀取資料庫中的 imageUrl，若無則顯示預設網址 */
                 src={content?.hero?.imageUrl || "https://images.weserv.nl/?url=duk.tw/v8dWec.jpg"}
-                // src="https://images.weserv.nl/?url=duk.tw/v8dWec.jpg"
+                /* src="https://images.weserv.nl/?url=duk.tw/v8dWec.jpg"*/
                 alt="陳品潔律師"
                 className="w-full h-full object-cover transition-all duration-700"
                 referrerPolicy="no-referrer"
